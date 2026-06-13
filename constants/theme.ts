@@ -39,10 +39,10 @@ export const Fonts = Platform.select({
     mono: 'ui-monospace',
   },
   default: {
-    sans: 'normal',
-    serif: 'serif',
-    rounded: 'normal',
-    mono: 'monospace',
+    sans: 'plus-jakarta-sans',
+    serif: 'plus-jakarta-sans',
+    rounded: 'plus-jakarta-sans',
+    mono: 'ui-monospace',
   },
   web: {
     sans: "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
