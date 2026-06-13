@@ -5,6 +5,7 @@ export interface BeratPayload {
   berat: number;
   persen: number;
   estimasi_menit: number;
+  laju: number;
 }
 
 export interface PosisiPayload {
@@ -24,6 +25,8 @@ export interface Pasien {
   berat?: number;
   persen?: number;
   estimasiMenit?: number;
+  laju?: number;
+  lajuSebelumnya?: number;
   statusPosisi?: 'stabil' | 'terganggu' | 'jatuh';
   sudut?: number;
   statusInfus?: StatusInfus;
