@@ -2,15 +2,16 @@ export type StatusInfus = 'lancar' | 'habis' | 'terganggu';
 
 export interface BeratPayload {
   device_id: string;
-  berat: number;     
-  persen: number;     
+  berat: number;
+  persen: number;
   estimasi_menit: number;
 }
 
 export interface PosisiPayload {
   device_id: string;
-  sudut: number;    
-  status: 'stabil' | 'terganggu';
+  sudut: number;
+  magnitude?: number;
+  status: 'stabil' | 'terganggu' | 'jatuh';
 }
 
 export interface Pasien {
@@ -20,19 +21,17 @@ export interface Pasien {
   obat: string;
   deviceIdBerat: string;
   deviceIdPosisi: string;
-  // data realtime dari MQTT
   berat?: number;
   persen?: number;
   estimasiMenit?: number;
-  statusPosisi?: 'stabil' | 'terganggu';
+  statusPosisi?: 'stabil' | 'terganggu' | 'jatuh';
   sudut?: number;
   statusInfus?: StatusInfus;
-  // log
   log?: LogEntry[];
 }
 
 export interface LogEntry {
-  waktu: string;     
+  waktu: string;
   pesan: string;
   tipe: 'info' | 'warning' | 'success';
 }

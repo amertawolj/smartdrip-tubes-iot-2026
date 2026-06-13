@@ -90,7 +90,9 @@ export default function DetailPage() {
             ['Laju Konsumsi Obat', pasien.estimasiMenit && pasien.berat
               ? `~${Math.round(pasien.berat / pasien.estimasiMenit)} gram/menit`
               : '—'],
-            ['Status Tiang', pasien.statusPosisi === 'terganggu'
+            ['Status Tiang', pasien.statusPosisi === 'jatuh'
+              ? `🚨 JATUH! (${pasien.sudut ?? '?'}°)`
+              : pasien.statusPosisi === 'terganggu'
               ? `⚠️ Terganggu (${pasien.sudut ?? '?'}°)`
               : '✅ Stabil'],
           ] as [string, string][]).map(([label, value]) => (
