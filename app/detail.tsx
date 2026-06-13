@@ -1,10 +1,12 @@
 import React from 'react';
 import {
   View, Text, ScrollView, TouchableOpacity,
-  StyleSheet, SafeAreaView, Alert,
+  StyleSheet, SafeAreaView, Alert, Platform, StatusBar,
 } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useApp } from '@/context/AppContext';
+
+const STATUS_BAR_HEIGHT = Platform.OS === 'android' ? (StatusBar.currentHeight ?? 24) : 0;
 
 function formatWaktu(iso: string): string {
   const d = new Date(iso);
@@ -87,10 +89,12 @@ export default function DetailPage() {
             ['Obat', pasien.obat],
             ['Berat Obat Sekarang', pasien.berat !== undefined ? `${pasien.berat} gram` : '—'],
             ['Estimasi Waktu Habis', formatEstimasi(pasien.estimasiMenit)],
-            ['Laju Konsumsi Obat', pasien.estimasiMenit && pasien.berat
-              ? `~${Math.round(pasien.berat / pasien.estimasiMenit)} gram/menit`
+            ['Laju Konsumsi Obat', pasien.laju !== undefined
+              ? `${pasien.laju.toFixed(1)} gram/menit`
               : '—'],
-            ['Status Tiang', pasien.statusPosisi === 'terganggu'
+            ['Status Tiang', pasien.statusPosisi === 'jatuh'
+              ? `🚨 JATUH! (${pasien.sudut ?? '?'}°)`
+              : pasien.statusPosisi === 'terganggu'
               ? `⚠️ Terganggu (${pasien.sudut ?? '?'}°)`
               : '✅ Stabil'],
           ] as [string, string][]).map(([label, value]) => (
@@ -132,7 +136,7 @@ export default function DetailPage() {
 }
 
 const styles = StyleSheet.create({
-  safe: { flex: 1, backgroundColor: '#F5F5F5' },
+  safe: { flex: 1, backgroundColor: '#F5F5F5', paddingTop: STATUS_BAR_HEIGHT },
   scroll: { padding: 20, paddingBottom: 60 },
   back: { fontSize: 24, color: '#1B7A4A', fontWeight: '700', marginBottom: 20 },
   notFound: { flex: 1, alignItems: 'center', justifyContent: 'center', gap: 12 },

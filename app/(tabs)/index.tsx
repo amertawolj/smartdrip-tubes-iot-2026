@@ -1,4 +1,7 @@
 import React, { useEffect } from 'react';
+import { Platform, StatusBar as RNStatusBar } from 'react-native';
+
+const STATUS_BAR_HEIGHT = Platform.OS === 'android' ? (RNStatusBar.currentHeight ?? 24) : 0;
 import {
   View, Text, ScrollView, TouchableOpacity,
   StyleSheet, SafeAreaView, Modal, TextInput, Alert,
@@ -128,20 +131,20 @@ const placeholderMap = {
 };
 
 const styles = StyleSheet.create({
-  safe: { flex: 1, backgroundColor: '#F5F5F5' },
+  safe: { flex: 1, backgroundColor: '#F5F5F5', paddingTop: STATUS_BAR_HEIGHT },
   scroll: { padding: 20, paddingBottom: 40 },
   headerRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginBottom: 16 },
-  halo: { fontSize: 24, fontWeight: '700', color: '#1B7A4A' },
+  halo: { fontSize: 22, fontWeight: '700', color: '#1B7A4A' },
   dot: { width: 10, height: 10, borderRadius: 5 },
   btnTambah: { backgroundColor: '#1B7A4A', borderRadius: 10, paddingVertical: 12, alignItems: 'center', marginBottom: 20 },
   btnTambahText: { color: '#fff', fontWeight: '700', fontSize: 15 },
-  sectionLabel: { fontSize: 24, fontWeight: '700', color: '#1B7A4A', marginBottom: 12 },
+  sectionLabel: { fontSize: 18, fontWeight: '700', color: '#1A1A1A', marginBottom: 12 },
   empty: { alignItems: 'center', marginTop: 60 },
   emptyText: { color: '#999', fontSize: 14, marginBottom: 4 },
   modalSafe: { flex: 1, backgroundColor: '#fff' },
   modalScroll: { padding: 24, paddingBottom: 60 },
   back: { fontSize: 15, color: '#1B7A4A', fontWeight: '600', marginBottom: 12 },
-  modalTitle: { fontSize: 24, fontWeight: '700', color: '#1B7A4A', marginBottom: 24 },
+  modalTitle: { fontSize: 22, fontWeight: '700', color: '#1B7A4A', marginBottom: 24 },
   inputGroup: { marginBottom: 16 },
   label: { fontSize: 14, color: '#333', marginBottom: 6, fontWeight: '500' },
   input: { backgroundColor: '#F0F0F0', borderRadius: 10, padding: 14, fontSize: 15, color: '#1A1A1A' },
